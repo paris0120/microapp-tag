@@ -17,6 +17,9 @@ import reactor.core.publisher.Mono;
 public interface TagRepository extends ReactiveCrudRepository<TagTag, Long>, TagRepositoryInternal {
     Flux<TagTag> findAllBy(Pageable pageable);
 
+    Flux<TagTag> findAllByParentServerOrderByTagAsc(String server);
+    Flux<TagTag> findAllByParentServerAndParentTypeOrderByTagAsc(String server, String type);
+
     @Override
     <S extends TagTag> Mono<S> save(S entity);
 

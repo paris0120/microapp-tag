@@ -39,11 +39,23 @@ export const TagDetail = () => {
           </dt>
           <dd>{tagEntity.tag}</dd>
           <dt>
-            <span id="color">
-              <Translate contentKey="tagApp.tagTag.color">Color</Translate>
+            <span id="textColor">
+              <Translate contentKey="tagApp.tagTag.textColor">Text Color</Translate>
             </span>
           </dt>
-          <dd>{tagEntity.color}</dd>
+          <dd>{tagEntity.textColor}</dd>
+          <dt>
+            <span id="fillColor">
+              <Translate contentKey="tagApp.tagTag.fillColor">Fill Color</Translate>
+            </span>
+          </dt>
+          <dd>{tagEntity.fillColor}</dd>
+          <dt>
+            <span id="borderColor">
+              <Translate contentKey="tagApp.tagTag.borderColor">Border Color</Translate>
+            </span>
+          </dt>
+          <dd>{tagEntity.borderColor}</dd>
           <dt>
             <span id="icon">
               <Translate contentKey="tagApp.tagTag.icon">Icon</Translate>

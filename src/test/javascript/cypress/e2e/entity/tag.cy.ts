@@ -15,12 +15,7 @@ describe('Tag e2e test', () => {
   const tagPageUrlPattern = new RegExp('/tag/tag(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const tagSample = {
-    parentId: 42287,
-    parentType: 'multi-byte Soft virtual',
-    parentServer: 'Washington',
-    parentUuid: '7b413b60-fb92-4198-ae34-f56baff1cf31',
-  };
+  const tagSample = { tag: 'Georgia Nevada Implementation', parentServer: 'dynamic invoice Handmade' };
 
   let tag;
 
@@ -169,20 +164,24 @@ describe('Tag e2e test', () => {
     it('should create an instance of Tag', () => {
       cy.get(`[data-cy="tag"]`).type('Card multi-tasking compressing').should('have.value', 'Card multi-tasking compressing');
 
-      cy.get(`[data-cy="color"]`).type('blue').should('have.value', 'blue');
+      cy.get(`[data-cy="textColor"]`).type('Wooden').should('have.value', 'Wooden');
 
-      cy.get(`[data-cy="icon"]`).type('Mouse').should('have.value', 'Mouse');
+      cy.get(`[data-cy="fillColor"]`).type('exploit Security Product').should('have.value', 'exploit Security Product');
 
-      cy.get(`[data-cy="parentId"]`).type('37601').should('have.value', '37601');
+      cy.get(`[data-cy="borderColor"]`).type('compress Market').should('have.value', 'compress Market');
 
-      cy.get(`[data-cy="parentType"]`).type('plug-and-play Togo Tactics').should('have.value', 'plug-and-play Togo Tactics');
+      cy.get(`[data-cy="icon"]`).type('Nevada optimizing South').should('have.value', 'Nevada optimizing South');
 
-      cy.get(`[data-cy="parentServer"]`).type('seamless').should('have.value', 'seamless');
+      cy.get(`[data-cy="parentId"]`).type('40625').should('have.value', '40625');
+
+      cy.get(`[data-cy="parentType"]`).type('primary Markets Montana').should('have.value', 'primary Markets Montana');
+
+      cy.get(`[data-cy="parentServer"]`).type('strategy').should('have.value', 'strategy');
 
       cy.get(`[data-cy="parentUuid"]`)
-        .type('9b98d4b5-8c76-4fd1-bf6c-98625dd53256')
+        .type('532566ec-9d05-4c9a-9500-9ee7b413b60f')
         .invoke('val')
-        .should('match', new RegExp('9b98d4b5-8c76-4fd1-bf6c-98625dd53256'));
+        .should('match', new RegExp('532566ec-9d05-4c9a-9500-9ee7b413b60f'));
 
       cy.get(entityCreateSaveButtonSelector).click();
 

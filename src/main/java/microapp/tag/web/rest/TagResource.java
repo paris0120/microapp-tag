@@ -2,18 +2,17 @@ package microapp.tag.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import microapp.tag.repository.TagRepository;
+import microapp.tag.service.KafkaService;
 import microapp.tag.service.TagService;
 import microapp.tag.service.dto.TagDTO;
 import microapp.tag.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -36,7 +35,7 @@ import tech.jhipster.web.util.reactive.ResponseUtil;
  * REST controller for managing {@link microapp.tag.domain.TagTag}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class TagResource {
 
     private final Logger log = LoggerFactory.getLogger(TagResource.class);
@@ -195,6 +194,15 @@ public class TagResource {
                     )
                     .body(countWithEntities.getT2())
             );
+    }
+
+    @Autowired
+    KafkaService kafkaService;
+
+    @GetMapping("/types")
+    public Mono<ResponseEntity<HashMap<String, String[]>>> getAllTags(ServerHttpRequest request) {
+        log.debug("REST request to get all server types");
+        return Mono.just(kafkaService.getServerTypes()).map(countWithEntities -> ResponseEntity.ok().body(countWithEntities));
     }
 
     /**

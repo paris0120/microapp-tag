@@ -15,7 +15,7 @@ const initialState: EntityState<ITag> = {
   updateSuccess: false,
 };
 
-const apiUrl = 'services/tag/api/tags';
+const apiUrl = 'services/tag/api/admin/tags';
 
 // Actions
 
@@ -36,6 +36,7 @@ export const getEntity = createAsyncThunk(
 export const createEntity = createAsyncThunk(
   'tag/create_entity',
   async (entity: ITag, thunkAPI) => {
+    console.log(entity);
     const result = await axios.post<ITag>(apiUrl, cleanEntity(entity));
     thunkAPI.dispatch(getEntities({}));
     return result;

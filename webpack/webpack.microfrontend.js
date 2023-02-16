@@ -17,8 +17,8 @@ module.exports = ({ serve }) => {
         filename: 'remoteEntry.js',
         shareScope: 'default',
         exposes: {
-          './entities-menu': './src/main/webapp/app/entities/menu',
-          './entities-routes': './src/main/webapp/app/entities/routes',
+          './entities-admin-menu': './src/main/webapp/app/entities/menu',
+          './entities-admin-routes': './src/main/webapp/app/entities/routes',
         },
         shared: {
           ...Object.fromEntries(

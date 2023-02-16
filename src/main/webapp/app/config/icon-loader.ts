@@ -31,43 +31,13 @@ import { faUserPlus } from '@fortawesome/free-solid-svg-icons/faUserPlus';
 import { faUsers } from '@fortawesome/free-solid-svg-icons/faUsers';
 import { faUsersCog } from '@fortawesome/free-solid-svg-icons/faUsersCog';
 import { faWrench } from '@fortawesome/free-solid-svg-icons/faWrench';
+import * as Icons from '@fortawesome/free-solid-svg-icons';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 
+export const iconList = Object.keys(Icons)
+  .filter(key => key !== 'fas' && key !== 'prefix')
+  .map(icon => Icons[icon]);
 export const loadIcons = () => {
-  library.add(
-    faArrowLeft,
-    faAsterisk,
-    faBan,
-    faBell,
-    faBook,
-    faCloud,
-    faCogs,
-    faDatabase,
-    faEye,
-    faFlag,
-    faHeart,
-    faHome,
-    faList,
-    faLock,
-    faPencilAlt,
-    faPlus,
-    faRoad,
-    faSave,
-    faSignInAlt,
-    faSignOutAlt,
-    faSearch,
-    faSort,
-    faSync,
-    faTachometerAlt,
-    faTasks,
-    faThList,
-    faTimesCircle,
-    faTrash,
-    faUser,
-    faUserPlus,
-    faUsers,
-    faUsersCog,
-    faWrench
-  );
+  library.add(...iconList);
 };

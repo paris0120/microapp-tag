@@ -1,0 +1,27 @@
+{
+  "tagApp": {
+    "tagParentType": {
+      "home": {
+        "title": "Parent Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Parent Type",
+        "createOrEditLabel": "Create or edit a Parent Type",
+        "notFound": "No Parent Types found"
+      },
+      "created": "A new Parent Type is created with identifier {{ param }}",
+      "updated": "A Parent Type is updated with identifier {{ param }}",
+      "deleted": "A Parent Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Parent Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Parent Type"
+      },
+      "id": "ID",
+      "parentId": "Parent Id",
+      "parentType": "Parent Type",
+      "server": "Server",
+      "userManageable": "User Manageable"
+    }
+  }
+}

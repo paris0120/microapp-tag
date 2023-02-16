@@ -36,8 +36,14 @@ class TagResourceIT {
     private static final String DEFAULT_TAG = "AAAAAAAAAA";
     private static final String UPDATED_TAG = "BBBBBBBBBB";
 
-    private static final String DEFAULT_COLOR = "AAAAAAAAAA";
-    private static final String UPDATED_COLOR = "BBBBBBBBBB";
+    private static final String DEFAULT_TEXT_COLOR = "AAAAAAAAAA";
+    private static final String UPDATED_TEXT_COLOR = "BBBBBBBBBB";
+
+    private static final String DEFAULT_FILL_COLOR = "AAAAAAAAAA";
+    private static final String UPDATED_FILL_COLOR = "BBBBBBBBBB";
+
+    private static final String DEFAULT_BORDER_COLOR = "AAAAAAAAAA";
+    private static final String UPDATED_BORDER_COLOR = "BBBBBBBBBB";
 
     private static final String DEFAULT_ICON = "AAAAAAAAAA";
     private static final String UPDATED_ICON = "BBBBBBBBBB";
@@ -83,7 +89,9 @@ class TagResourceIT {
     public static TagTag createEntity(EntityManager em) {
         TagTag tagTag = new TagTag()
             .tag(DEFAULT_TAG)
-            .color(DEFAULT_COLOR)
+            .textColor(DEFAULT_TEXT_COLOR)
+            .fillColor(DEFAULT_FILL_COLOR)
+            .borderColor(DEFAULT_BORDER_COLOR)
             .icon(DEFAULT_ICON)
             .parentId(DEFAULT_PARENT_ID)
             .parentType(DEFAULT_PARENT_TYPE)
@@ -101,7 +109,9 @@ class TagResourceIT {
     public static TagTag createUpdatedEntity(EntityManager em) {
         TagTag tagTag = new TagTag()
             .tag(UPDATED_TAG)
-            .color(UPDATED_COLOR)
+            .textColor(UPDATED_TEXT_COLOR)
+            .fillColor(UPDATED_FILL_COLOR)
+            .borderColor(UPDATED_BORDER_COLOR)
             .icon(UPDATED_ICON)
             .parentId(UPDATED_PARENT_ID)
             .parentType(UPDATED_PARENT_TYPE)
@@ -153,7 +163,9 @@ class TagResourceIT {
         assertThat(tagList).hasSize(databaseSizeBeforeCreate + 1);
         TagTag testTag = tagList.get(tagList.size() - 1);
         assertThat(testTag.getTag()).isEqualTo(DEFAULT_TAG);
-        assertThat(testTag.getColor()).isEqualTo(DEFAULT_COLOR);
+        assertThat(testTag.getTextColor()).isEqualTo(DEFAULT_TEXT_COLOR);
+        assertThat(testTag.getFillColor()).isEqualTo(DEFAULT_FILL_COLOR);
+        assertThat(testTag.getBorderColor()).isEqualTo(DEFAULT_BORDER_COLOR);
         assertThat(testTag.getIcon()).isEqualTo(DEFAULT_ICON);
         assertThat(testTag.getParentId()).isEqualTo(DEFAULT_PARENT_ID);
         assertThat(testTag.getParentType()).isEqualTo(DEFAULT_PARENT_TYPE);
@@ -185,32 +197,10 @@ class TagResourceIT {
     }
 
     @Test
-    void checkParentIdIsRequired() throws Exception {
+    void checkTagIsRequired() throws Exception {
         int databaseSizeBeforeTest = tagRepository.findAll().collectList().block().size();
         // set the field null
-        tagTag.setParentId(null);
-
-        // Create the Tag, which fails.
-        TagDTO tagDTO = tagMapper.toDto(tagTag);
-
-        webTestClient
-            .post()
-            .uri(ENTITY_API_URL)
-            .contentType(MediaType.APPLICATION_JSON)
-            .bodyValue(TestUtil.convertObjectToJsonBytes(tagDTO))
-            .exchange()
-            .expectStatus()
-            .isBadRequest();
-
-        List<TagTag> tagList = tagRepository.findAll().collectList().block();
-        assertThat(tagList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    void checkParentTypeIsRequired() throws Exception {
-        int databaseSizeBeforeTest = tagRepository.findAll().collectList().block().size();
-        // set the field null
-        tagTag.setParentType(null);
+        tagTag.setTag(null);
 
         // Create the Tag, which fails.
         TagDTO tagDTO = tagMapper.toDto(tagTag);
@@ -251,28 +241,6 @@ class TagResourceIT {
     }
 
     @Test
-    void checkParentUuidIsRequired() throws Exception {
-        int databaseSizeBeforeTest = tagRepository.findAll().collectList().block().size();
-        // set the field null
-        tagTag.setParentUuid(null);
-
-        // Create the Tag, which fails.
-        TagDTO tagDTO = tagMapper.toDto(tagTag);
-
-        webTestClient
-            .post()
-            .uri(ENTITY_API_URL)
-            .contentType(MediaType.APPLICATION_JSON)
-            .bodyValue(TestUtil.convertObjectToJsonBytes(tagDTO))
-            .exchange()
-            .expectStatus()
-            .isBadRequest();
-
-        List<TagTag> tagList = tagRepository.findAll().collectList().block();
-        assertThat(tagList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
     void getAllTags() {
         // Initialize the database
         tagRepository.save(tagTag).block();
@@ -292,8 +260,12 @@ class TagResourceIT {
             .value(hasItem(tagTag.getId().intValue()))
             .jsonPath("$.[*].tag")
             .value(hasItem(DEFAULT_TAG))
-            .jsonPath("$.[*].color")
-            .value(hasItem(DEFAULT_COLOR))
+            .jsonPath("$.[*].textColor")
+            .value(hasItem(DEFAULT_TEXT_COLOR))
+            .jsonPath("$.[*].fillColor")
+            .value(hasItem(DEFAULT_FILL_COLOR))
+            .jsonPath("$.[*].borderColor")
+            .value(hasItem(DEFAULT_BORDER_COLOR))
             .jsonPath("$.[*].icon")
             .value(hasItem(DEFAULT_ICON))
             .jsonPath("$.[*].parentId")
@@ -326,8 +298,12 @@ class TagResourceIT {
             .value(is(tagTag.getId().intValue()))
             .jsonPath("$.tag")
             .value(is(DEFAULT_TAG))
-            .jsonPath("$.color")
-            .value(is(DEFAULT_COLOR))
+            .jsonPath("$.textColor")
+            .value(is(DEFAULT_TEXT_COLOR))
+            .jsonPath("$.fillColor")
+            .value(is(DEFAULT_FILL_COLOR))
+            .jsonPath("$.borderColor")
+            .value(is(DEFAULT_BORDER_COLOR))
             .jsonPath("$.icon")
             .value(is(DEFAULT_ICON))
             .jsonPath("$.parentId")
@@ -363,7 +339,9 @@ class TagResourceIT {
         TagTag updatedTagTag = tagRepository.findById(tagTag.getId()).block();
         updatedTagTag
             .tag(UPDATED_TAG)
-            .color(UPDATED_COLOR)
+            .textColor(UPDATED_TEXT_COLOR)
+            .fillColor(UPDATED_FILL_COLOR)
+            .borderColor(UPDATED_BORDER_COLOR)
             .icon(UPDATED_ICON)
             .parentId(UPDATED_PARENT_ID)
             .parentType(UPDATED_PARENT_TYPE)
@@ -385,7 +363,9 @@ class TagResourceIT {
         assertThat(tagList).hasSize(databaseSizeBeforeUpdate);
         TagTag testTag = tagList.get(tagList.size() - 1);
         assertThat(testTag.getTag()).isEqualTo(UPDATED_TAG);
-        assertThat(testTag.getColor()).isEqualTo(UPDATED_COLOR);
+        assertThat(testTag.getTextColor()).isEqualTo(UPDATED_TEXT_COLOR);
+        assertThat(testTag.getFillColor()).isEqualTo(UPDATED_FILL_COLOR);
+        assertThat(testTag.getBorderColor()).isEqualTo(UPDATED_BORDER_COLOR);
         assertThat(testTag.getIcon()).isEqualTo(UPDATED_ICON);
         assertThat(testTag.getParentId()).isEqualTo(UPDATED_PARENT_ID);
         assertThat(testTag.getParentType()).isEqualTo(UPDATED_PARENT_TYPE);
@@ -475,8 +455,9 @@ class TagResourceIT {
 
         partialUpdatedTagTag
             .tag(UPDATED_TAG)
+            .fillColor(UPDATED_FILL_COLOR)
+            .borderColor(UPDATED_BORDER_COLOR)
             .icon(UPDATED_ICON)
-            .parentId(UPDATED_PARENT_ID)
             .parentType(UPDATED_PARENT_TYPE)
             .parentUuid(UPDATED_PARENT_UUID);
 
@@ -494,9 +475,11 @@ class TagResourceIT {
         assertThat(tagList).hasSize(databaseSizeBeforeUpdate);
         TagTag testTag = tagList.get(tagList.size() - 1);
         assertThat(testTag.getTag()).isEqualTo(UPDATED_TAG);
-        assertThat(testTag.getColor()).isEqualTo(DEFAULT_COLOR);
+        assertThat(testTag.getTextColor()).isEqualTo(DEFAULT_TEXT_COLOR);
+        assertThat(testTag.getFillColor()).isEqualTo(UPDATED_FILL_COLOR);
+        assertThat(testTag.getBorderColor()).isEqualTo(UPDATED_BORDER_COLOR);
         assertThat(testTag.getIcon()).isEqualTo(UPDATED_ICON);
-        assertThat(testTag.getParentId()).isEqualTo(UPDATED_PARENT_ID);
+        assertThat(testTag.getParentId()).isEqualTo(DEFAULT_PARENT_ID);
         assertThat(testTag.getParentType()).isEqualTo(UPDATED_PARENT_TYPE);
         assertThat(testTag.getParentServer()).isEqualTo(DEFAULT_PARENT_SERVER);
         assertThat(testTag.getParentUuid()).isEqualTo(UPDATED_PARENT_UUID);
@@ -515,7 +498,9 @@ class TagResourceIT {
 
         partialUpdatedTagTag
             .tag(UPDATED_TAG)
-            .color(UPDATED_COLOR)
+            .textColor(UPDATED_TEXT_COLOR)
+            .fillColor(UPDATED_FILL_COLOR)
+            .borderColor(UPDATED_BORDER_COLOR)
             .icon(UPDATED_ICON)
             .parentId(UPDATED_PARENT_ID)
             .parentType(UPDATED_PARENT_TYPE)
@@ -536,7 +521,9 @@ class TagResourceIT {
         assertThat(tagList).hasSize(databaseSizeBeforeUpdate);
         TagTag testTag = tagList.get(tagList.size() - 1);
         assertThat(testTag.getTag()).isEqualTo(UPDATED_TAG);
-        assertThat(testTag.getColor()).isEqualTo(UPDATED_COLOR);
+        assertThat(testTag.getTextColor()).isEqualTo(UPDATED_TEXT_COLOR);
+        assertThat(testTag.getFillColor()).isEqualTo(UPDATED_FILL_COLOR);
+        assertThat(testTag.getBorderColor()).isEqualTo(UPDATED_BORDER_COLOR);
         assertThat(testTag.getIcon()).isEqualTo(UPDATED_ICON);
         assertThat(testTag.getParentId()).isEqualTo(UPDATED_PARENT_ID);
         assertThat(testTag.getParentType()).isEqualTo(UPDATED_PARENT_TYPE);

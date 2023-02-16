@@ -13,22 +13,24 @@ public class TagDTO implements Serializable {
 
     private Long id;
 
+    @NotNull(message = "must not be null")
     private String tag;
 
-    private String color;
+    private String textColor;
+
+    private String fillColor;
+
+    private String borderColor;
 
     private String icon;
 
-    @NotNull(message = "must not be null")
     private Long parentId;
 
-    @NotNull(message = "must not be null")
     private String parentType;
 
     @NotNull(message = "must not be null")
     private String parentServer;
 
-    @NotNull(message = "must not be null")
     private UUID parentUuid;
 
     public Long getId() {
@@ -47,12 +49,28 @@ public class TagDTO implements Serializable {
         this.tag = tag;
     }
 
-    public String getColor() {
-        return color;
+    public String getTextColor() {
+        return textColor;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setTextColor(String textColor) {
+        this.textColor = textColor;
+    }
+
+    public String getFillColor() {
+        return fillColor;
+    }
+
+    public void setFillColor(String fillColor) {
+        this.fillColor = fillColor;
+    }
+
+    public String getBorderColor() {
+        return borderColor;
+    }
+
+    public void setBorderColor(String borderColor) {
+        this.borderColor = borderColor;
     }
 
     public String getIcon() {
@@ -122,7 +140,9 @@ public class TagDTO implements Serializable {
         return "TagDTO{" +
             "id=" + getId() +
             ", tag='" + getTag() + "'" +
-            ", color='" + getColor() + "'" +
+            ", textColor='" + getTextColor() + "'" +
+            ", fillColor='" + getFillColor() + "'" +
+            ", borderColor='" + getBorderColor() + "'" +
             ", icon='" + getIcon() + "'" +
             ", parentId=" + getParentId() +
             ", parentType='" + getParentType() + "'" +

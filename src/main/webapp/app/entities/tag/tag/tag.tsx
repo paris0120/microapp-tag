@@ -108,8 +108,14 @@ export const Tag = () => {
                 <th className="hand" onClick={sort('tag')}>
                   <Translate contentKey="tagApp.tagTag.tag">Tag</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('color')}>
-                  <Translate contentKey="tagApp.tagTag.color">Color</Translate> <FontAwesomeIcon icon="sort" />
+                <th className="hand" onClick={sort('textColor')}>
+                  <Translate contentKey="tagApp.tagTag.textColor">Text Color</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('fillColor')}>
+                  <Translate contentKey="tagApp.tagTag.fillColor">Fill Color</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('borderColor')}>
+                  <Translate contentKey="tagApp.tagTag.borderColor">Border Color</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('icon')}>
                   <Translate contentKey="tagApp.tagTag.icon">Icon</Translate> <FontAwesomeIcon icon="sort" />
@@ -138,7 +144,9 @@ export const Tag = () => {
                     </Button>
                   </td>
                   <td>{tag.tag}</td>
-                  <td>{tag.color}</td>
+                  <td>{tag.textColor}</td>
+                  <td>{tag.fillColor}</td>
+                  <td>{tag.borderColor}</td>
                   <td>{tag.icon}</td>
                   <td>{tag.parentId}</td>
                   <td>{tag.parentType}</td>

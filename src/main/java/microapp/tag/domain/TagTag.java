@@ -24,17 +24,21 @@ public class TagTag implements Serializable {
     @Column("tag")
     private String tag;
 
-    @Column("color")
-    private String color;
+    @Column("text_color")
+    private String textColor;
+
+    @Column("fill_color")
+    private String fillColor;
+
+    @Column("border_color")
+    private String borderColor;
 
     @Column("icon")
     private String icon;
 
-    @NotNull(message = "must not be null")
     @Column("parent_id")
     private Long parentId;
 
-    @NotNull(message = "must not be null")
     @Column("parent_type")
     private String parentType;
 
@@ -42,7 +46,6 @@ public class TagTag implements Serializable {
     @Column("parent_server")
     private String parentServer;
 
-    @NotNull(message = "must not be null")
     @Column("parent_uuid")
     private UUID parentUuid;
 
@@ -74,17 +77,43 @@ public class TagTag implements Serializable {
         this.tag = tag;
     }
 
-    public String getColor() {
-        return this.color;
+    public String getTextColor() {
+        return this.textColor;
     }
 
-    public TagTag color(String color) {
-        this.setColor(color);
+    public TagTag textColor(String textColor) {
+        this.setTextColor(textColor);
         return this;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setTextColor(String textColor) {
+        this.textColor = textColor;
+    }
+
+    public String getFillColor() {
+        return this.fillColor;
+    }
+
+    public TagTag fillColor(String fillColor) {
+        this.setFillColor(fillColor);
+        return this;
+    }
+
+    public void setFillColor(String fillColor) {
+        this.fillColor = fillColor;
+    }
+
+    public String getBorderColor() {
+        return this.borderColor;
+    }
+
+    public TagTag borderColor(String borderColor) {
+        this.setBorderColor(borderColor);
+        return this;
+    }
+
+    public void setBorderColor(String borderColor) {
+        this.borderColor = borderColor;
     }
 
     public String getIcon() {
@@ -177,7 +206,9 @@ public class TagTag implements Serializable {
         return "TagTag{" +
             "id=" + getId() +
             ", tag='" + getTag() + "'" +
-            ", color='" + getColor() + "'" +
+            ", textColor='" + getTextColor() + "'" +
+            ", fillColor='" + getFillColor() + "'" +
+            ", borderColor='" + getBorderColor() + "'" +
             ", icon='" + getIcon() + "'" +
             ", parentId=" + getParentId() +
             ", parentType='" + getParentType() + "'" +

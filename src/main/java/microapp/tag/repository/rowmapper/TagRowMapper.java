@@ -27,7 +27,9 @@ public class TagRowMapper implements BiFunction<Row, String, TagTag> {
         TagTag entity = new TagTag();
         entity.setId(converter.fromRow(row, prefix + "_id", Long.class));
         entity.setTag(converter.fromRow(row, prefix + "_tag", String.class));
-        entity.setColor(converter.fromRow(row, prefix + "_color", String.class));
+        entity.setTextColor(converter.fromRow(row, prefix + "_text_color", String.class));
+        entity.setFillColor(converter.fromRow(row, prefix + "_fill_color", String.class));
+        entity.setBorderColor(converter.fromRow(row, prefix + "_border_color", String.class));
         entity.setIcon(converter.fromRow(row, prefix + "_icon", String.class));
         entity.setParentId(converter.fromRow(row, prefix + "_parent_id", Long.class));
         entity.setParentType(converter.fromRow(row, prefix + "_parent_type", String.class));

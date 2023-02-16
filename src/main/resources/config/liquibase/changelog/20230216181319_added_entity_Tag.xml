@@ -9,31 +9,37 @@
     <!--
         Added the entity Tag.
     -->
-    <changeSet id="20230214003815-1" author="jhipster">
+    <changeSet id="20230216181319-1" author="jhipster">
         <createTable tableName="tag">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="tag" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="text_color" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="color" type="varchar(255)">
+            <column name="fill_color" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="border_color" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="icon" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="parent_id" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="parent_type" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="parent_server" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
             <column name="parent_uuid" type="${uuidType}">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
@@ -49,7 +55,7 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20230214003815-1-data" author="jhipster" context="faker">
+    <changeSet id="20230216181319-1-data" author="jhipster" context="faker">
         <loadData
                   file="config/liquibase/fake-data/tag.csv"
                   separator=";"
@@ -57,7 +63,9 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="tag" type="string"/>
-            <column name="color" type="string"/>
+            <column name="text_color" type="string"/>
+            <column name="fill_color" type="string"/>
+            <column name="border_color" type="string"/>
             <column name="icon" type="string"/>
             <column name="parent_id" type="numeric"/>
             <column name="parent_type" type="string"/>

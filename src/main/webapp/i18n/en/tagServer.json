@@ -1,0 +1,27 @@
+{
+  "tagApp": {
+    "tagServer": {
+      "home": {
+        "title": "Servers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Server",
+        "createOrEditLabel": "Create or edit a Server",
+        "notFound": "No Servers found"
+      },
+      "created": "A new Server is created with identifier {{ param }}",
+      "updated": "A Server is updated with identifier {{ param }}",
+      "deleted": "A Server is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Server {{ id }}?"
+      },
+      "detail": {
+        "title": "Server"
+      },
+      "id": "ID",
+      "server": "Server",
+      "uuid": "Uuid",
+      "decoder": "Decoder",
+      "password": "Password"
+    }
+  }
+}
