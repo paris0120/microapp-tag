@@ -18,10 +18,12 @@
         "title": "Parent Type"
       },
       "id": "ID",
+      "topic": "Topic",
       "parentId": "Parent Id",
       "parentType": "Parent Type",
       "server": "Server",
-      "userManageable": "User Manageable"
+      "userManageable": "User Manageable",
+      "isEncrypted": "Is Encrypted"
     }
   }
 }

@@ -33,6 +33,12 @@ export const ParentTypeDetail = () => {
           </dt>
           <dd>{parentTypeEntity.id}</dd>
           <dt>
+            <span id="topic">
+              <Translate contentKey="tagApp.tagParentType.topic">Topic</Translate>
+            </span>
+          </dt>
+          <dd>{parentTypeEntity.topic}</dd>
+          <dt>
             <span id="parentId">
               <Translate contentKey="tagApp.tagParentType.parentId">Parent Id</Translate>
             </span>
@@ -56,6 +62,12 @@ export const ParentTypeDetail = () => {
             </span>
           </dt>
           <dd>{parentTypeEntity.userManageable ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="isEncrypted">
+              <Translate contentKey="tagApp.tagParentType.isEncrypted">Is Encrypted</Translate>
+            </span>
+          </dt>
+          <dd>{parentTypeEntity.isEncrypted ? 'true' : 'false'}</dd>
         </dl>
         <Button tag={Link} to="/tag/parent-type" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

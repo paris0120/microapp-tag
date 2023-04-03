@@ -13,6 +13,9 @@ public class ParentTypeDTO implements Serializable {
     private Long id;
 
     @NotNull(message = "must not be null")
+    private String topic;
+
+    @NotNull(message = "must not be null")
     private Long parentId;
 
     @NotNull(message = "must not be null")
@@ -24,12 +27,23 @@ public class ParentTypeDTO implements Serializable {
     @NotNull(message = "must not be null")
     private Boolean userManageable;
 
+    @NotNull(message = "must not be null")
+    private Boolean isEncrypted;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public Long getParentId() {
@@ -64,6 +78,14 @@ public class ParentTypeDTO implements Serializable {
         this.userManageable = userManageable;
     }
 
+    public Boolean getIsEncrypted() {
+        return isEncrypted;
+    }
+
+    public void setIsEncrypted(Boolean isEncrypted) {
+        this.isEncrypted = isEncrypted;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -90,10 +112,12 @@ public class ParentTypeDTO implements Serializable {
     public String toString() {
         return "ParentTypeDTO{" +
             "id=" + getId() +
+            ", topic='" + getTopic() + "'" +
             ", parentId=" + getParentId() +
             ", parentType='" + getParentType() + "'" +
             ", server='" + getServer() + "'" +
             ", userManageable='" + getUserManageable() + "'" +
+            ", isEncrypted='" + getIsEncrypted() + "'" +
             "}";
     }
 }

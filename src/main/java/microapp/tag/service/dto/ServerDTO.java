@@ -3,6 +3,7 @@ package microapp.tag.service.dto;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
+import javax.persistence.Lob;
 import javax.validation.constraints.*;
 
 /**
@@ -20,6 +21,7 @@ public class ServerDTO implements Serializable {
 
     private String decoder;
 
+    @Lob
     private String password;
 
     public Long getId() {

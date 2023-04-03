@@ -1,11 +1,10 @@
 id;tag;text_color;fill_color;border_color;icon;parent_id;parent_type;parent_server;parent_uuid
-1;Branding back-end circuit;project Diverse Car;Granite metrics;Vermont Small Keyboard;Soap;26806;open Frozen AGP;Haiti Dinar Bedfordshire;fc96ed2d-5ba8-4bf8-87f6-e351bef82f78
-2;Pennsylvania;next Pizza;SAS Bike Tasty;Customer;Cambridgeshire;74029;invoice out-of-the-box;COM supply-chains;401dac47-0d0e-4bd4-86fb-d13ac70f23d8
-3;Awesome scale Forint;reboot Loan Versatile;Analyst Ameliorated;Grocery;Avenue;2528;Direct;Fresh Movies;26d3d3e5-91ff-4c12-90f8-f6b0a2eeb741
-4;invoice Ergonomic Account;Cotton bypassing;architectures navigate;transmitting Tuna Functionality;Franc;25516;applications Rubber Plastic;Mobility District;63b6c7d3-ce4b-412a-8757-51d2fc2186cd
-5;deposit;Advanced Practical Coordinator;program ubiquitous;protocol compressing;implement;85580;Executive Forward;knowledge Rial Tactics;5f009be7-d481-4d2a-a4ce-2a26f618afbe
-6;Investment;microchip Ergonomic;Bike SAS California;Chair;holistic black;31881;Tuvalu users;embrace vortals;b11e7f66-6da4-4a7f-a4d1-d6015ef03646
-7;Montana Incredible CSS;Direct;Officer impactful;synthesizing redefine Cambridgeshire;Rubber next-generation;31433;archive;edge reboot solution-oriented;943b48b2-c72e-444e-b431-60e74ea4c5b1
-8;haptic;deposit regional;program;Checking Hawaii Technician;Pennsylvania;87284;invoice neutral clicks-and-mortar;Bacon;6cc036f8-f094-4307-bcbc-45fd98c70d1b
-9;capability;Court;markets;cross-platform;utilize Rial;34105;drive connecting;Engineer;7a46f575-7184-42de-839c-5cc589a299f7
-10;real-time solid;Wooden web-enabled SCSI;withdrawal;PCI Incredible Coves;Implementation yellow;81487;sky function compress;copying Handcrafted Unbranded;4ee6bda2-6a12-4b9b-8782-52a998538430
+1;support;;;;;-1;TICKET;TICKET;null
+2;bug;;#D33115;;;-1;TICKET;TICKET;null
+3;security;#FFFFFF;#9F0500;;;-1;TICKET;TICKET;null
+4;billing;;#FCDC00;#FCDC00;dollar-sign;-1;STORE;STORE;null
+5;trusted;;#68BC00;;;-1;STORE;STORE;null
+6;food;;#DBDF00;;;-1;ITEM;STORE;null
+7;toys;;#73D8FF;;;-1;ITEM;STORE;null
+8;credit card;;#FCDC00;;credit-card;-1;STORE;STORE;null
+9;best price;;#653294;;;-1;ITEM;STORE;null

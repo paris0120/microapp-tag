@@ -115,8 +115,6 @@ spring:
           enabled: false
     stream:
       kafka:
-        topics: TICKET_TAGS,
-          TAG_TAGS
         binder:
           replicationFactor: 1
           auto-create-topics: true

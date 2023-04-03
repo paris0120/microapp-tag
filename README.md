@@ -4,6 +4,8 @@ This application is a "microservice" application intended to be part of a micros
 It provides Tag management service to the other apps through Kafka. There is no user interface for users.
 Only admin can directly manage tags through the API. All the other operations are through Kafka command with microapp.tag.domain.KafkaCmd.
 
+## Rest Api
+
 ## Dependencies
 
 This application is configured for Service Discovery and Configuration with Consul.
@@ -27,13 +29,10 @@ Gateway needs the following libraries to properly load the app.
 
 ## Commands
 
-1. TAGS: list all the tags for the selected server and type.
-2. REG: register a server and its types.
+1. TAGS [server name] [type name] [parent id]: list all the tags for the selected server and type.
 
 ## Configurations
 
-1. Topics: spring.cloud.steam.kafka.topics
-2. Authorised Servers & Types: spring.cloud.steam.kafka.servers
-3. Consul:
-4. Kafka:
-5. Oauth2:
+1. Consul:
+2. Kafka:
+3. Oauth2:

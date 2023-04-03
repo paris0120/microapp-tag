@@ -29,9 +29,6 @@ public class KafkaService implements InitializingBean {
     @Value(value = "${spring.application.name:tag}")
     private String serverName;
 
-    @Value(value = "${spring.cloud.stream.kafka.topics}")
-    private String[] topicList;
-
     private HashMap<String, String[]> serverTypes;
     private HashSet<String> topics;
 
@@ -128,6 +125,5 @@ public class KafkaService implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         topics = new HashSet<>();
-        for (String topic : topicList) createTopic(topic);
     }
 }

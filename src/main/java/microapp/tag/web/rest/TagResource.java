@@ -182,7 +182,7 @@ public class TagResource {
         log.debug("REST request to get a page of Tags");
         return tagService
             .countAll()
-            .zipWith(tagService.findAll(pageable).collectList())
+            .zipWith(tagService.findAll().collectList())
             .map(countWithEntities ->
                 ResponseEntity
                     .ok()

@@ -15,10 +15,11 @@ import reactor.core.publisher.Mono;
 @SuppressWarnings("unused")
 @Repository
 public interface TagRepository extends ReactiveCrudRepository<TagTag, Long>, TagRepositoryInternal {
-    Flux<TagTag> findAllBy(Pageable pageable);
+    Flux<TagTag> findAllByOrderByTagAsc();
 
     Flux<TagTag> findAllByParentServerOrderByTagAsc(String server);
     Flux<TagTag> findAllByParentServerAndParentTypeOrderByTagAsc(String server, String type);
+    Flux<TagTag> findAllByParentServerAndParentTypeAAndParentIdOrderByTagAsc(String server, String type, long id);
 
     @Override
     <S extends TagTag> Mono<S> save(S entity);

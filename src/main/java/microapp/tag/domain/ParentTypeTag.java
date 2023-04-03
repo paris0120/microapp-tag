@@ -21,6 +21,10 @@ public class ParentTypeTag implements Serializable {
     private Long id;
 
     @NotNull(message = "must not be null")
+    @Column("topic")
+    private String topic;
+
+    @NotNull(message = "must not be null")
     @Column("parent_id")
     private Long parentId;
 
@@ -36,6 +40,10 @@ public class ParentTypeTag implements Serializable {
     @Column("user_manageable")
     private Boolean userManageable;
 
+    @NotNull(message = "must not be null")
+    @Column("is_encrypted")
+    private Boolean isEncrypted;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -49,6 +57,19 @@ public class ParentTypeTag implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTopic() {
+        return this.topic;
+    }
+
+    public ParentTypeTag topic(String topic) {
+        this.setTopic(topic);
+        return this;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public Long getParentId() {
@@ -103,6 +124,19 @@ public class ParentTypeTag implements Serializable {
         this.userManageable = userManageable;
     }
 
+    public Boolean getIsEncrypted() {
+        return this.isEncrypted;
+    }
+
+    public ParentTypeTag isEncrypted(Boolean isEncrypted) {
+        this.setIsEncrypted(isEncrypted);
+        return this;
+    }
+
+    public void setIsEncrypted(Boolean isEncrypted) {
+        this.isEncrypted = isEncrypted;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -127,10 +161,12 @@ public class ParentTypeTag implements Serializable {
     public String toString() {
         return "ParentTypeTag{" +
             "id=" + getId() +
+            ", topic='" + getTopic() + "'" +
             ", parentId=" + getParentId() +
             ", parentType='" + getParentType() + "'" +
             ", server='" + getServer() + "'" +
             ", userManageable='" + getUserManageable() + "'" +
+            ", isEncrypted='" + getIsEncrypted() + "'" +
             "}";
     }
 }

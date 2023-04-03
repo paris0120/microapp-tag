@@ -25,10 +25,12 @@ public class ParentTypeRowMapper implements BiFunction<Row, String, ParentTypeTa
     public ParentTypeTag apply(Row row, String prefix) {
         ParentTypeTag entity = new ParentTypeTag();
         entity.setId(converter.fromRow(row, prefix + "_id", Long.class));
+        entity.setTopic(converter.fromRow(row, prefix + "_topic", String.class));
         entity.setParentId(converter.fromRow(row, prefix + "_parent_id", Long.class));
         entity.setParentType(converter.fromRow(row, prefix + "_parent_type", String.class));
         entity.setServer(converter.fromRow(row, prefix + "_server", String.class));
         entity.setUserManageable(converter.fromRow(row, prefix + "_user_manageable", Boolean.class));
+        entity.setIsEncrypted(converter.fromRow(row, prefix + "_is_encrypted", Boolean.class));
         return entity;
     }
 }

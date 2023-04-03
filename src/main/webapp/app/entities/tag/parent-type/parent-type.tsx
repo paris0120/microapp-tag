@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button, Table } from 'reactstrap';
+
 import { Translate, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IParentType } from 'app/shared/model/tag/parent-type.model';
 import { getEntities } from './parent-type.reducer';
+import { Button, List, Space } from 'antd';
 
 export const ParentType = () => {
   const dispatch = useAppDispatch();
@@ -86,90 +87,40 @@ export const ParentType = () => {
       <h2 id="parent-type-heading" data-cy="ParentTypeHeading">
         <Translate contentKey="tagApp.tagParentType.home.title">Parent Types</Translate>
         <div className="d-flex justify-content-end">
-          <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="tagApp.tagParentType.home.refreshListLabel">Refresh List</Translate>
-          </Button>
-          <Link to="/tag/parent-type/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
+          <Button type="link" id="create" data-cy="entityCreateButton" href="/admin/tag/parent-type/new" color="info">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
             <Translate contentKey="tagApp.tagParentType.home.createLabel">Create new Parent Type</Translate>
-          </Link>
+          </Button>
         </div>
       </h2>
       <div className="table-responsive">
         {parentTypeList && parentTypeList.length > 0 ? (
-          <Table responsive>
-            <thead>
-              <tr>
-                <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="tagApp.tagParentType.id">ID</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('parentId')}>
-                  <Translate contentKey="tagApp.tagParentType.parentId">Parent Id</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('parentType')}>
-                  <Translate contentKey="tagApp.tagParentType.parentType">Parent Type</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('server')}>
-                  <Translate contentKey="tagApp.tagParentType.server">Server</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('userManageable')}>
-                  <Translate contentKey="tagApp.tagParentType.userManageable">User Manageable</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {parentTypeList.map((parentType, i) => (
-                <tr key={`entity-${i}`} data-cy="entityTable">
-                  <td>
-                    <Button tag={Link} to={`/tag/parent-type/${parentType.id}`} color="link" size="sm">
-                      {parentType.id}
-                    </Button>
-                  </td>
-                  <td>{parentType.parentId}</td>
-                  <td>{parentType.parentType}</td>
-                  <td>{parentType.server}</td>
-                  <td>{parentType.userManageable ? 'true' : 'false'}</td>
-                  <td className="text-end">
-                    <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`/tag/parent-type/${parentType.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.view">View</Translate>
-                        </span>
-                      </Button>
-                      <Button
-                        tag={Link}
-                        to={`/tag/parent-type/${parentType.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
-                        color="primary"
-                        size="sm"
-                        data-cy="entityEditButton"
-                      >
-                        <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
-                      </Button>
-                      <Button
-                        tag={Link}
-                        to={`/tag/parent-type/${parentType.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
-                        color="danger"
-                        size="sm"
-                        data-cy="entityDeleteButton"
-                      >
-                        <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
-                      </Button>
+          <List
+            itemLayout="horizontal"
+            dataSource={parentTypeList}
+            renderItem={(item: IParentType) => (
+              <List.Item>
+                <List.Item.Meta
+                  title={
+                    <Space>
+                      <a href={`/admin/tag/parent-type/${item.id}/edit`}>
+                        {item.parentType} {item.parentId < 0 ? '' : `(${item.parentId})`}: {item.server}{' '}
+                      </a>
+
+                      {item.isEncrypted ? <FontAwesomeIcon icon="lock" title="Encrypted" /> : ''}
+                      {item.userManageable ? <FontAwesomeIcon icon="user-pen" title="User Managerable" /> : ''}
+                    </Space>
+                  }
+                  description={
+                    <div>
+                      <span style={{ float: 'left' }}>{'#' + item.topic}</span>
                     </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+                  }
+                />
+              </List.Item>
+            )}
+          />
         ) : (
           !loading && (
             <div className="alert alert-warning">

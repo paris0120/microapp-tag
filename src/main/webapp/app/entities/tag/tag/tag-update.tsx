@@ -7,9 +7,9 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity, updateEntity, createEntity, reset } from './tag.reducer';
 import { AutoComplete, Button, Col, Form, Input, Row, Select, Space, Typography } from 'antd';
-import { Colorpicker } from 'antd-colorpicker';
-import { iconList } from 'app/config/icon-loader';
+import { iconKeys, iconList } from 'app/config/icon-loader';
 import axios from 'axios';
+import { CompactPicker } from 'react-color';
 
 export const TagUpdate = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ export const TagUpdate = () => {
 
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
-  const apiUrl = 'services/tag/api/types';
+  const apiUrl = 'services/tag/api/admin/types';
 
   const tagEntity = useAppSelector(state => state.tag.tag.entity);
   const loading = useAppSelector(state => state.tag.tag.loading);
@@ -31,20 +31,9 @@ export const TagUpdate = () => {
   const [types, setTypes] = useState([]);
   const [servers, setServers] = useState([]);
 
-  const iconOptions = iconList.map(icon => {
-    return {
-      value: icon.iconName,
-      label: (
-        <Space>
-          <FontAwesomeIcon title={icon.iconName} icon={icon.iconName} />
-          <Text>{icon.iconName}</Text>
-        </Space>
-      ),
-    };
-  });
-
+  const [iconOptions, setIconOptions] = useState([]);
   const handleClose = () => {
-    navigate('/tag/tag' + location.search);
+    navigate('/admin/tag/tag' + location.search);
   };
 
   const handleSelectServer = (server: string) => {
@@ -64,9 +53,21 @@ export const TagUpdate = () => {
         })
       );
       setTypeMap(map.data);
-      console.log(typeMap);
-      console.log(map.data);
     });
+
+    setIconOptions(
+      iconKeys.sort().map(icon => {
+        return {
+          value: icon,
+          label: (
+            <Space>
+              <FontAwesomeIcon title={icon} icon={icon} />
+              <Text>{icon}</Text>
+            </Space>
+          ),
+        };
+      })
+    );
   }, []);
 
   useEffect(() => {
@@ -84,6 +85,7 @@ export const TagUpdate = () => {
   }, [updateSuccess]);
 
   const saveEntity = values => {
+    // values.fillColor
     const entity = {
       ...tagEntity,
       ...values,
@@ -94,7 +96,7 @@ export const TagUpdate = () => {
     if (entity.fillColor) entity.fillColor = entity.fillColor.hex;
 
     if (entity.borderColor) entity.borderColor = entity.borderColor.hex;
-
+    console.log(entity);
     if (isNew) {
       dispatch(createEntity(entity));
     } else {
@@ -156,16 +158,8 @@ export const TagUpdate = () => {
                 <Select options={types}></Select>
               </Form.Item>
 
-              <Form.Item label={translate('tagApp.tagTag.textColor')} id="tag-textColor" name="textColor" data-cy="textColor">
-                <Colorpicker picker={'CompactPicker'} />
-              </Form.Item>
-
-              <Form.Item label={translate('tagApp.tagTag.fillColor')} id="tag-fillColor" name="fillColor" data-cy="fillColor">
-                <Colorpicker picker={'CompactPicker'} />
-              </Form.Item>
-
-              <Form.Item label={translate('tagApp.tagTag.borderColor')} id="tag-borderColor" name="borderColor" data-cy="borderColor">
-                <Colorpicker picker={'CompactPicker'} />
+              <Form.Item label="Color" id="tag-fillColor" name="fillColor" data-cy="fillColor">
+                <CompactPicker />
               </Form.Item>
 
               <Form.Item label={translate('tagApp.tagTag.icon')} id="tag-icon" name="icon" data-cy="icon">
@@ -177,7 +171,7 @@ export const TagUpdate = () => {
                 />
               </Form.Item>
 
-              <Button type="link" id="cancel-save" data-cy="entityCreateCancelButton" href="/tag/tag" color="info">
+              <Button type="link" id="cancel-save" data-cy="entityCreateCancelButton" href="/admin/tag/tag" color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
                 <Translate contentKey="entity.action.back">Back</Translate>

@@ -75,13 +75,48 @@ public class TagService {
     /**
      * Get all the tags.
      *
-     * @param pageable the pagination information.
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public Flux<TagDTO> findAll(Pageable pageable) {
+    public Flux<TagDTO> findAll() {
         log.debug("Request to get all Tags");
-        return tagRepository.findAllBy(pageable).map(tagMapper::toDto);
+        return tagRepository.findAllByOrderByTagAsc().map(tagMapper::toDto);
+    }
+
+    /**
+     * Get all the tags.
+     *
+     * @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public Flux<TagDTO> findAll(String server, String type, long id) {
+        log.debug("Request to get all Tags");
+        return tagRepository.findAllByParentServerAndParentTypeAAndParentIdOrderByTagAsc(server, type, id).map(tagMapper::toDto);
+    }
+
+    /**
+     * Get all the tags.
+     *
+     * @param server the server name.
+     * @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public Flux<TagDTO> findAll(String server) {
+        log.debug("Request to get all Tags");
+        return tagRepository.findAllByParentServerOrderByTagAsc(server).map(tagMapper::toDto);
+    }
+
+    /**
+     * Get all the tags.
+     *
+     * @param server the server name.
+     * @param type the parent type name.
+     * @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public Flux<TagDTO> findAll(String server, String type) {
+        log.debug("Request to get all Tags");
+        return tagRepository.findAllByParentServerAndParentTypeOrderByTagAsc(server, type).map(tagMapper::toDto);
     }
 
     /**

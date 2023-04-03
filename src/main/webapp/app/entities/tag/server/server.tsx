@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button, Table } from 'reactstrap';
-import { Translate, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
+import { byteSize, Translate, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -11,12 +10,14 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IServer } from 'app/shared/model/tag/server.model';
 import { getEntities } from './server.reducer';
+import { Button, Col, List, Row, Space, Typography } from 'antd';
 
 export const Server = () => {
   const dispatch = useAppDispatch();
 
   const location = useLocation();
   const navigate = useNavigate();
+  const { Text, Link } = Typography;
 
   const [paginationState, setPaginationState] = useState(
     overridePaginationStateWithQueryParams(getSortState(location, ITEMS_PER_PAGE, 'id'), location.search)
@@ -86,116 +87,43 @@ export const Server = () => {
       <h2 id="server-heading" data-cy="ServerHeading">
         <Translate contentKey="tagApp.tagServer.home.title">Servers</Translate>
         <div className="d-flex justify-content-end">
-          <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="tagApp.tagServer.home.refreshListLabel">Refresh List</Translate>
-          </Button>
-          <Link to="/tag/server/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
+          <Button type="link" id="create" data-cy="entityCreateButton" href="/admin/tag/server/new" color="info">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
             <Translate contentKey="tagApp.tagServer.home.createLabel">Create new Server</Translate>
-          </Link>
+          </Button>
         </div>
       </h2>
       <div className="table-responsive">
         {serverList && serverList.length > 0 ? (
-          <Table responsive>
-            <thead>
-              <tr>
-                <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="tagApp.tagServer.id">ID</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('server')}>
-                  <Translate contentKey="tagApp.tagServer.server">Server</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('uuid')}>
-                  <Translate contentKey="tagApp.tagServer.uuid">Uuid</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('decoder')}>
-                  <Translate contentKey="tagApp.tagServer.decoder">Decoder</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('password')}>
-                  <Translate contentKey="tagApp.tagServer.password">Password</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {serverList.map((server, i) => (
-                <tr key={`entity-${i}`} data-cy="entityTable">
-                  <td>
-                    <Button tag={Link} to={`/tag/server/${server.id}`} color="link" size="sm">
-                      {server.id}
-                    </Button>
-                  </td>
-                  <td>{server.server}</td>
-                  <td>{server.uuid}</td>
-                  <td>{server.decoder}</td>
-                  <td>{server.password}</td>
-                  <td className="text-end">
-                    <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`/tag/server/${server.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.view">View</Translate>
-                        </span>
-                      </Button>
-                      <Button
-                        tag={Link}
-                        to={`/tag/server/${server.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
-                        color="primary"
-                        size="sm"
-                        data-cy="entityEditButton"
-                      >
-                        <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
-                      </Button>
-                      <Button
-                        tag={Link}
-                        to={`/tag/server/${server.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
-                        color="danger"
-                        size="sm"
-                        data-cy="entityDeleteButton"
-                      >
-                        <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <>
+            <Row>
+              <Col span={24}>
+                <List
+                  itemLayout="horizontal"
+                  dataSource={serverList}
+                  renderItem={(item: IServer) => (
+                    <List.Item>
+                      <List.Item.Meta
+                        title={
+                          <div>
+                            <a style={{ float: 'left' }} href={'/admin/tag/server/' + item.id + '/edit'}>
+                              {item.server}
+                            </a>
+                            {item.decoder ? <Text style={{ float: 'right' }}>{item.decoder}</Text> : ''}
+                          </div>
+                        }
+                      />
+                    </List.Item>
+                  )}
+                />
+              </Col>
+            </Row>
+          </>
         ) : (
-          !loading && (
-            <div className="alert alert-warning">
-              <Translate contentKey="tagApp.tagServer.home.notFound">No Servers found</Translate>
-            </div>
-          )
+          ''
         )}
       </div>
-      {totalItems ? (
-        <div className={serverList && serverList.length > 0 ? '' : 'd-none'}>
-          <div className="justify-content-center d-flex">
-            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} i18nEnabled />
-          </div>
-          <div className="justify-content-center d-flex">
-            <JhiPagination
-              activePage={paginationState.activePage}
-              onSelect={handlePagination}
-              maxButtons={5}
-              itemsPerPage={paginationState.itemsPerPage}
-              totalItems={totalItems}
-            />
-          </div>
-        </div>
-      ) : (
-        ''
-      )}
     </div>
   );
 };

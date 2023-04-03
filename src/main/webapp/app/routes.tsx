@@ -25,6 +25,14 @@ const AppRoutes = () => {
         <Route index element={<Home />} />
         <Route path="logout" element={<Logout />} />
         <Route
+          path="admin/tag/*"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
+              <EntitiesRoutes />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="admin/*"
           element={
             <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN]}>
@@ -33,14 +41,6 @@ const AppRoutes = () => {
           }
         />
         <Route path="oauth2/authorization/oidc" element={<LoginRedirect />} />
-        <Route
-          path="tag/*"
-          element={
-            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
-              <EntitiesRoutes />
-            </PrivateRoute>
-          }
-        />
         <Route path="*" element={<PageNotFound />} />
       </ErrorBoundaryRoutes>
     </div>
